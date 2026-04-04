@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dishbook Home</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <div class="top">
+        <div><a href="/">Dishbook</a></div>
+        <div>
+            {% if user.is_authenticated %}
+                {{ user.get_full_name|default:user.username }} |
+                <a href="/logout">Sign out</a>
+            {% else %}
+                <a href="/login">Sign in</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/s">Search</a>
+    </div>
+
+    <h1>Welcome to Dishbook</h1>
+    <p>Browse recipes shared by our community.</p>
+
+    <div class="recipes">
+        {% for recipe in recipes %}
+            <div class="recipe-box">
+                <h2><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h2>
+                {% if recipe.photo %}
+                    <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
+                {% endif %}
+                <p>{{ recipe.description|truncatewords:20 }}</p>
+                <div>
+                    {% for tag in recipe.tags.all %}
+                        <span>{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <p>No recipes yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

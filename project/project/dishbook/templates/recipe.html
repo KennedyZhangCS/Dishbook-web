@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ recipe.title }} - Dishbook</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <div class="top">
+        <div><a href="/">Dishbook</a></div>
+        <div>
+            {% if user.is_authenticated %}
+                {{ user.get_full_name|default:user.username }} |
+                <a href="/logout">Sign out</a>
+            {% else %}
+                <a href="/login">Sign in</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="nav-row">
+        <a href="/">Home</a>
+        <a href="/s">Search</a>
+    </div>
+
+    <h1>{{ recipe.title }}</h1>
+    <p>By <a href="/profile/{{ recipe.author.username }}/">{{ recipe.author.get_full_name|default:recipe.author.username }}</a></p>
+
+    <p>
+        {% for tag in recipe.tags.all %}
+            <span>{{ tag.name }}</span>
+        {% endfor %}
+    </p>
+
+    {% if recipe.photo %}
+        <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
+    {% endif %}
+
+    <p>{{ recipe.description }}</p>
+
+    <div class="recipe-info">
+        <p><strong>Prep time:</strong> {{ recipe.prep_time_minutes }} minutes</p>
+        <p><strong>Cook time:</strong> {{ recipe.cook_time_minutes }} minutes</p>
+        <p><strong>Total time:</strong> {{ recipe.total_time }} minutes</p>
+        <p><strong>Serves:</strong> {{ recipe.serves }}</p>
+    </div>
+
+    <div class="recipe-columns">
+        <div>
+            <h2>Ingredients</h2>
+            <ul>
+                {% for step in recipe.steps.all %}
+                    {% for ingredient in step.ingredients.all %}
+                        <li>{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h2>Steps</h2>
+            <ol>
+                {% for step in recipe.steps.all %}
+                    <li>{{ step.description }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
