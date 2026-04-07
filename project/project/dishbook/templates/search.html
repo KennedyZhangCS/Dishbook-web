@@ -25,7 +25,7 @@
         <a href="/s">Search</a>
     </div>
     {%endblock%}
-    
+
     {% block content %}
     <h1>Search Recipes</h1>
 
@@ -39,7 +39,7 @@
 
     <div class="cards-area">
         {% for recipe in recipes %}
-            <section class="card">
+            <!-- <section class="card">
                 <h2><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h2>
                 {% if recipe.photo %}
                     <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
@@ -50,7 +50,9 @@
                         <li><a href="/s?q=tag:{{ tag.name }}">{{ tag.name }}</a></li>
                     {% endfor %}
                 </ul>
-            </section>
+            </section> -->
+            {% include "dishbook/recipe_card.html" %}
+            
         {% empty %}
             <p>No matching recipes found.</p>
         {% endfor %}

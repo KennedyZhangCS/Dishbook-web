@@ -50,7 +50,7 @@
     <h2>Recipes</h2>
     <div class="recipes-list">
         {% for recipe in recipes %}
-            <div class="recipe-box">
+            <!-- <div class="recipe-box">
                 <h3><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h3>
                 {% if recipe.photo %}
                     <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
@@ -61,7 +61,9 @@
                         <span>{{ tag.name }}</span>
                     {% endfor %}
                 </p>
-            </div>
+            </div> -->
+            {% include "dishbook/recipe_card.html" %}
+            
         {% empty %}
             <p>This user has no public recipes.</p>
         {% endfor %}

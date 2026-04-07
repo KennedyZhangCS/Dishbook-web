@@ -29,9 +29,9 @@
     <h1>Welcome to Dishbook</h1>
     <p>Browse recipes shared by our community.</p>
 
-    <div class="recipes">
+    <div class="recipes-list">
         {% for recipe in recipes %}
-            <div class="recipe-box">
+            <!-- <div class="recipe-box">
                 <h2><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h2>
                 {% if recipe.photo %}
                     <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
@@ -42,7 +42,10 @@
                         <span>{{ tag.name }}</span>
                     {% endfor %}
                 </div>
-            </div>
+            </div> -->
+           
+            {% include "dishbook/recipe_card.html" %}
+
         {% empty %}
             <p>No recipes yet.</p>
         {% endfor %}
