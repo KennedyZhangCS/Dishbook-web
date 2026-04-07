@@ -1,12 +1,12 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>{{ author.get_full_name|default:author.username }} - Dishbook</title>
     <link rel="stylesheet" href="/static/main.css">
-</head>
-<body>
-    <div class="top">
+</head> -->
+<!-- <body> -->
+    <!-- <div class="top">
         <div><a href="/">Dishbook</a></div>
         <div>
             {% if user.is_authenticated %}
@@ -16,13 +16,23 @@
                 <a href="/login">Sign in</a>
             {% endif %}
         </div>
-    </div>
+    </div> -->
 
+    <!-- <div class="nav">
+        <a href="/">Home</a>
+        <a href="/s">Search</a>
+    </div> -->
+    {% extends "base.html" %}
+    {% block title %}{{ author.get_full_name|default:author.username }} - Dishbook{% endblock %}
+
+    {% block nav %}
     <div class="nav">
         <a href="/">Home</a>
         <a href="/s">Search</a>
     </div>
+    {% endblock %}
 
+    {% block content %}
     <h1>{{ author.get_full_name|default:author.username }}</h1>
 
     <div class="profile-intro">
@@ -56,5 +66,6 @@
             <p>This user has no public recipes.</p>
         {% endfor %}
     </div>
-</body>
-</html>
+<!-- </body> -->
+ {% endblock %}
+<!-- </html> -->

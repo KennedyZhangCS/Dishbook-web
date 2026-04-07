@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -16,13 +16,16 @@
                 <a href="/login">Sign in</a>
             {% endif %}
         </div>
-    </div>
-
+    </div> -->
+    {% extends "base.html" %}
+    {% block title %}{{ recipe.title }} - Dishbook{% endblock%}
+    {% block nav %}
     <div class="nav-row">
         <a href="/">Home</a>
         <a href="/s">Search</a>
     </div>
-
+    {%endblock%}
+    {% block content %}
     <h1>{{ recipe.title }}</h1>
     <p>By <a href="/profile/{{ recipe.author.username }}/">{{ recipe.author.get_full_name|default:recipe.author.username }}</a></p>
 
@@ -66,5 +69,6 @@
             </ol>
         </div>
     </div>
-</body>
-</html>
+    {% endblock %}
+<!-- </body> -->
+<!-- </html> -->

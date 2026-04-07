@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -16,8 +16,17 @@
                 <a href="/login">Sign in</a>
             {% endif %}
         </div>
+    </div> -->
+    {% extends "base.html" %}
+    {% block title %}Search - Dishbook{% endblock%}
+    {% block nav %}
+    <div class="nav-row">
+        <a href="/">Home</a>
+        <a href="/s">Search</a>
     </div>
-
+    {%endblock%}
+    
+    {% block content %}
     <h1>Search Recipes</h1>
 
     <div class="search-block">
@@ -46,5 +55,6 @@
             <p>No matching recipes found.</p>
         {% endfor %}
     </div>
-</body>
-</html>
+    {%endblock %}
+<!-- </body>
+</html> -->
