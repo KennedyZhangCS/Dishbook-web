@@ -19,26 +19,13 @@
         </form>
     </div>
 
-    <div class="cards-area">
-        {% for recipe in recipes %}
-            <!-- <section class="card">
-                <h2><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h2>
-                {% if recipe.photo %}
-                    <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
-                {% endif %}
-                <p>{{ recipe.description|truncatewords:18 }}</p>
-                <ul>
-                    {% for tag in recipe.tags.all %}
-                        <li><a href="/s?q=tag:{{ tag.name }}">{{ tag.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section> -->
-            {% include "dishbook/recipe_card.html" %}
-            
-        {% empty %}
-            <p>No matching recipes found.</p>
-        {% endfor %}
-    </div>
+    <div class="recipes-list">
+    {% for recipe in recipes %}
+        {% include "dishbook/recipe_card.html" %}
+    {% empty %}
+        <p>No recipes yet.</p>
+    {% endfor %}
+</div>
     {%endblock %}
 <!-- </body>
 </html> -->

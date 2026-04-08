@@ -43,7 +43,7 @@ def search(request):
     # Render the search page with both:
     # - the recipes to show
     # - the original query, so the search box can keep its value
-    return render(request, "search.html", {"recipes": recipes, "query": q})
+    return render(request, "dishbook/search.html", {"recipes": recipes, "query": q})
 
 
 def profile(request, username):

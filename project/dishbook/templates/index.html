@@ -12,26 +12,12 @@
     <p>Browse recipes shared by our community.</p>
 
     <div class="recipes-list">
-        {% for recipe in recipes %}
-            <!-- <div class="recipe-box">
-                <h2><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h2>
-                {% if recipe.photo %}
-                    <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
-                {% endif %}
-                <p>{{ recipe.description|truncatewords:20 }}</p>
-                <div>
-                    {% for tag in recipe.tags.all %}
-                        <span>{{ tag.name }}</span>
-                    {% endfor %}
-                </div>
-            </div> -->
-           
-            {% include "dishbook/recipe_card.html" %}
-
-        {% empty %}
-            <p>No recipes yet.</p>
-        {% endfor %}
-    </div>
+    {% for recipe in recipes %}
+        {% include "dishbook/recipe_card.html" %}
+    {% empty %}
+        <p>No recipes yet.</p>
+    {% endfor %}
+</div>
     {% endblock%}
 <!-- </body> -->
 <!-- </html> -->
