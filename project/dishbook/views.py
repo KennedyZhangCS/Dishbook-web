@@ -37,6 +37,8 @@ def search(request):
     recipes = Recipe.objects.filter(is_public=True).select_related("author")
 
     # TODO - add filtering of recipes
+    if q:
+        recipes = recipes.filter(title__icontains=q)
 
     # Render the search page with both:
     # - the recipes to show

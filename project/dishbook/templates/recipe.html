@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block content %}
     {% block title %}{{ recipe.title }} - Dishbook{% endblock%}
     {% block nav %}
     <div class="nav-row">
@@ -6,7 +7,7 @@
         <a href="/s">Search</a>
     </div>
     {%endblock%}
-    {% block content %}
+    
     <h1>{{ recipe.title }}</h1>
     <p>By <a href="/profile/{{ recipe.author.username }}/">{{ recipe.author.get_full_name|default:recipe.author.username }}</a></p>
 
@@ -50,6 +51,6 @@
             </ol>
         </div>
     </div>
-    {% endblock %}
+{% endblock %}
 <!-- </body> -->
 <!-- </html> -->
