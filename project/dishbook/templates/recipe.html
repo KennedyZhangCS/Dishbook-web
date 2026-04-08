@@ -1,56 +1,54 @@
 {% extends "base.html" %}
-    {% block content %}
-    {% block title %}{{ recipe.title }} - Dishbook{% endblock%}
-    
-    {% block nav %}
-    <div class="nav-row">
-        <a href="/">Home</a>
-        <a href="/s">Search</a>
+{% load static %}
+
+{% block title %}{{ recipe.title }} - Dishbook{% endblock %}
+
+{% block content %}
+<h1>{{ recipe.title }}</h1>
+<p>By <a href="/profile/{{ recipe.author.username }}/">{{ recipe.author.get_full_name|default:recipe.author.username }}</a></p>
+
+<p>
+    {% for tag in recipe.tags.all %}
+        <span class="tag">{{ tag.name }}</span>
+        {% if not forloop.last %} | {% endif %}
+    {% endfor %}
+</p>
+
+{% if recipe.photo %}
+    <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}" style="max-width: 100%;">
+{% endif %}
+
+<p>{{ recipe.description }}</p>
+
+<div class="recipe-info">
+    <p><strong>Prep time:</strong> {{ recipe.prep_time_minutes }} minutes</p>
+    <p><strong>Cook time:</strong> {{ recipe.cook_time_minutes }} minutes</p>
+    <p><strong>Total time:</strong> {{ recipe.total_time }} minutes</p>
+    <p><strong>Serves:</strong> {{ recipe.serves }}</p>
+</div>
+
+
+<div class="recipe-columns">
+    <div>
+        <h2>Ingredients</h2>
+        <ul>
+            {% for ingredient in recipe.ingredients.all %}
+                <li>{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
+            {% empty %}
+                <li>No ingredients listed</li>
+            {% endfor %}
+        </ul>
     </div>
-    {%endblock%}
-    
-    <h1>{{ recipe.title }}</h1>
-    <p>By <a href="/profile/{{ recipe.author.username }}/">{{ recipe.author.get_full_name|default:recipe.author.username }}</a></p>
 
-    <p>
-        {% for tag in recipe.tags.all %}
-            <span>{{ tag.name }}</span>
-        {% endfor %}
-    </p>
-
-    {% if recipe.photo %}
-        <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
-    {% endif %}
-
-    <p>{{ recipe.description }}</p>
-
-    <div class="recipe-info">
-        <p><strong>Prep time:</strong> {{ recipe.prep_time_minutes }} minutes</p>
-        <p><strong>Cook time:</strong> {{ recipe.cook_time_minutes }} minutes</p>
-        <p><strong>Total time:</strong> {{ recipe.total_time }} minutes</p>
-        <p><strong>Serves:</strong> {{ recipe.serves }}</p>
+    <div>
+        <h2>Steps</h2>
+        <ol>
+            {% for step in recipe.steps.all %}
+                <li>{{ step.description }}</li>
+            {% empty %}
+                <li>No steps listed</li>
+            {% endfor %}
+        </ol>
     </div>
-
-    <div class="recipe-columns">
-        <div>
-            <h2>Ingredients</h2>
-            <ul>
-                {% for step in recipe.steps.all %}
-                    {% for ingredient in step.ingredients.all %}
-                        <li>{{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}</li>
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div>
-            <h2>Steps</h2>
-            <ol>
-                {% for step in recipe.steps.all %}
-                    <li>{{ step.description }}</li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
+</div>
 {% endblock %}
-

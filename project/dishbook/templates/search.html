@@ -1,31 +1,23 @@
 {% extends "base.html" %}
+
+{% block title %}Search - Dishbook{% endblock %}
+
 {% block content %}
-    {% block title %}Search - Dishbook{% endblock%}
-    {% block nav %}
-    <div class="nav-row">
-        <a href="/">Home</a>
-        <a href="/s">Search</a>
-    </div>
-    {%endblock%}
+<h1>Search Recipes</h1>
 
-    
-    <h1>Search Recipes</h1>
+<div class="search-block">
+    <form action="/s" method="get">
+        <label for="big-search">Search</label>
+        <input id="big-search" type="search" name="q" value="{{ query }}">
+        <button>Search</button>
+    </form>
+</div>
 
-    <div class="search-block">
-        <form action="/s" method="get">
-            <label for="big-search">Search</label>
-            <input id="big-search" type="search" name="q" value="{{ query }}">
-            <button>Search</button>
-        </form>
-    </div>
-
-    <div class="recipes-list">
+<div class="recipes-list">
     {% for recipe in recipes %}
-        {% include "dishbook/recipe_card.html" %}
+        {% include "recipe_card.html" with recipe=recipe %}
     {% empty %}
-        <p>No recipes yet.</p>
+        <p>No recipes found.</p>
     {% endfor %}
 </div>
-    {%endblock %}
-<!-- </body>
-</html> -->
+{% endblock %}

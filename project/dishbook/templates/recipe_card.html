@@ -1,15 +1,17 @@
-<div class="recipe-box">
+<!-- recipe_card.html - Improved version -->
+<div class="recipe-card">
     <h3><a href="/recipe/{{ recipe.id }}/">{{ recipe.title }}</a></h3>
 
     {% if recipe.photo %}
-        <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}">
+        <img src="{{ recipe.photo.url }}" alt="Photo of {{ recipe.title }}" class="recipe-image">
     {% endif %}
 
-    <p>{{ recipe.description|truncatewords:16 }}</p>
+    <p class="recipe-description">{{ recipe.description|truncatewords:16 }}</p>
 
-    <p>
+    <div class="recipe-tags">
         {% for tag in recipe.tags.all %}
-            <span>{{ tag.name }}</span>
+            <span class="tag">{{ tag.name }}</span>
+            {% if not forloop.last %} {% endif %}
         {% endfor %}
-    </p>
+    </div>
 </div>
