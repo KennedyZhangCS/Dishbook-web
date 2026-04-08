@@ -1,28 +1,4 @@
-<!-- <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>{{ author.get_full_name|default:author.username }} - Dishbook</title>
-    <link rel="stylesheet" href="/static/main.css">
-</head> -->
-<!-- <body> -->
-    <!-- <div class="top">
-        <div><a href="/">Dishbook</a></div>
-        <div>
-            {% if user.is_authenticated %}
-                {{ user.get_full_name|default:user.username }} |
-                <a href="/logout">Sign out</a>
-            {% else %}
-                <a href="/login">Sign in</a>
-            {% endif %}
-        </div>
-    </div> -->
-
-    <!-- <div class="nav">
-        <a href="/">Home</a>
-        <a href="/s">Search</a>
-    </div> -->
-    {% extends "base.html" %}
+{% extends "base.html" %}
     {% block title %}{{ author.get_full_name|default:author.username }} - Dishbook{% endblock %}
 
     {% block nav %}

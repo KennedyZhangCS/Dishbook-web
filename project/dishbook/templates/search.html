@@ -1,23 +1,4 @@
-<!-- <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Search - Dishbook</title>
-    <link rel="stylesheet" href="/static/main.css">
-</head>
-<body>
-    <div class="top">
-        <div><a href="/">Dishbook</a></div>
-        <div>
-            {% if user.is_authenticated %}
-                {{ user.get_full_name|default:user.username }} |
-                <a href="/logout">Sign out</a>
-            {% else %}
-                <a href="/login">Sign in</a>
-            {% endif %}
-        </div>
-    </div> -->
-    {% extends "base.html" %}
+{% extends "base.html" %}
     {% block title %}Search - Dishbook{% endblock%}
     {% block nav %}
     <div class="nav-row">
