@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -20,4 +20,36 @@
     
     </body>
 
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Dishbook{% endblock %}</title>
+    <link rel="stylesheet" href="/static/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    
+    <div class="top">
+        <div class="nav-links">
+            <a href="/">Dishbook</a>
+            <a href="/s">Search</a>
+        </div>
+        <div class="user-links">
+            {% if user.is_authenticated %}
+                {{ user.get_full_name|default:user.username }} |
+                <a href="/logout">Sign out</a>
+            {% else %}
+                <a href="/login">Sign in</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
 </html>

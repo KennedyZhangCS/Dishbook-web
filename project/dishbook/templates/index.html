@@ -1,4 +1,21 @@
 {% extends "base.html" %}
+
+{% block title %}Dishbook Home{% endblock %}
+
+{% block content %}
+<h1>Welcome to Dishbook</h1>
+<p>Browse recipes shared by our community.</p>
+
+<div class="recipes-list">
+    {% for recipe in recipes %}
+        {% include "recipe_card.html" with recipe=recipe %}
+    {% empty %}
+        <p>No recipes yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<!-- {% extends "base.html" %}
 {% block content %}
     {% block title %}Dishbook Home {% endblock%}
     {% block nav %}
@@ -18,6 +35,4 @@
         <p>No recipes yet.</p>
     {% endfor %}
 </div>
-    {% endblock%}
-<!-- </body> -->
-<!-- </html> -->
+    {% endblock%} -->

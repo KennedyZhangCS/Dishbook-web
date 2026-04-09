@@ -2,11 +2,11 @@
 {% block content %}
     {% block title %}{{ author.get_full_name|default:author.username }} - Dishbook{% endblock %}
 
-    {% block nav %}
+    <!-- {% block nav %}
     <div class="nav">
         <a href="/">Home</a>
         <a href="/s">Search</a>
-    </div>
+    </div> -->
     {% endblock %}
 
     
@@ -27,7 +27,7 @@
     <h2>Recipes</h2>
     <div class="recipes-list">
     {% for recipe in recipes %}
-        {% include "dishbook/recipe_card.html" %}
+        {% include "recipe_card.html" with recipe=recipe %}
     {% empty %}
         <p>No recipes yet.</p>
     {% endfor %}
