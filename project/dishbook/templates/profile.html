@@ -1,14 +1,7 @@
 {% extends "base.html" %}
-{% block content %}
     {% block title %}{{ author.get_full_name|default:author.username }} - Dishbook{% endblock %}
 
-    <!-- {% block nav %}
-    <div class="nav">
-        <a href="/">Home</a>
-        <a href="/s">Search</a>
-    </div> -->
-    {% endblock %}
-
+    {% block content %}
     
     <h1>{{ author.get_full_name|default:author.username }}</h1>
 
@@ -32,6 +25,6 @@
         <p>No recipes yet.</p>
     {% endfor %}
 </div>
-<!-- </body> -->
+
  {% endblock %}
-<!-- </html> -->
+
