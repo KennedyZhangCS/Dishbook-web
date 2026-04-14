@@ -26,7 +26,27 @@ def recipe(request, recipe_id):
     # Send the selected recipe to the recipe detail template.
     return render(request, "recipe.html", {"recipe": selected_recipe})
 
+def recipe_detail(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
 
+    if request.method == "POST":
+        content = request.POST.get('content')
+
+        Comment.objects.create(
+            user=request.user,
+            recipe=recipe,
+            content=content
+        )
+
+        return redirect('recipe_detail', recipe_id=recipe.id)
+
+    comments = recipe.comments.all().order_by('-created_at')
+
+    return render(request, 'recipe.html', {
+        'recipe': recipe,
+        'comments': comments
+    })
+    
 def search(request):
     # Read the search query from the URL, like /s?q=toast.
     # If q is missing, use the empty string instead.
