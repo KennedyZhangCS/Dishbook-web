@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Profile, Recipe
-
+from django.http import JsonResponse
+from .models import Comment
 
 def index(request):
     # Start with public recipes only so logged-out users do not see private data.
@@ -26,25 +27,56 @@ def recipe(request, recipe_id):
     # Send the selected recipe to the recipe detail template.
     return render(request, "recipe.html", {"recipe": selected_recipe})
 
+# def recipe_detail(request, recipe_id):
+#     recipe = get_object_or_404(Recipe, id=recipe_id)
+
+#     if request.method == "POST":
+#         content = request.POST.get('content')
+
+#         if request.user.is_authenticated and content:
+#             comment = Comment.objects.create(
+#                 user=request.user,
+#                 recipe=recipe,
+#                 content=content
+#             )
+
+#             return JsonResponse({
+#                 'username': comment.user.username,
+#                 'content': comment.content,
+#                 'created_at': comment.created_at.strftime("%Y-%m-%d %H:%M")
+#             })
+
+#         return JsonResponse({'error': 'Invalid request'}, status=400)
+
+#     comments = recipe.comments.all().order_by('-created_at')
+
+#     return render(request, 'recipe.html', {
+#         'recipe': recipe,
+#         'comments': comments
+#     })
 def recipe_detail(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
 
     if request.method == "POST":
-        content = request.POST.get('content')
+        content = request.POST.get("content")
 
-        Comment.objects.create(
+        comment = Comment.objects.create(
             user=request.user,
             recipe=recipe,
             content=content
         )
 
-        return redirect('recipe_detail', recipe_id=recipe.id)
+        return JsonResponse({
+            "username": comment.user.username,
+            "content": comment.content,
+            "created_at": comment.created_at.strftime("%Y-%m-%d %H:%M")
+        })
 
-    comments = recipe.comments.all().order_by('-created_at')
+    comments = recipe.comments.all().order_by("-created_at")
 
-    return render(request, 'recipe.html', {
-        'recipe': recipe,
-        'comments': comments
+    return render(request, "recipe.html", {
+        "recipe": recipe,
+        "comments": comments
     })
     
 def search(request):
